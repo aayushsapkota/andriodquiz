@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Programming Quiz</string>
+    <string name="start">Start Quiz</string>
+    <string name="previous">Previous Results</string>
+    <string name="menu">menu</string>
+    <string name="score">Score : 0</string>
+    <string name="mainMenu">Main menu</string>
+    <string name="tryAgain">Try Again</string>
+    <string name="dontKnow">I don\'t know</string>
+    <string name="Question"> Question goes here and this can be quite long as long as you want it to be.</string>
+</resources>
