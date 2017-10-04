@@ -44,7 +44,6 @@ public class quiz extends AppCompatActivity {
     private int score = 0;
 
     public quiz() {
-
     }
 
     @Override
@@ -63,7 +62,7 @@ public class quiz extends AppCompatActivity {
             }
         });
 
-        Intent intent1 = new Intent(quiz.this,previousResults.class);
+        Intent intent1 = new Intent(quiz.this, previousResults.class);
 
         qView = (TextView) findViewById(R.id.question);
         bOption1 = (Button) findViewById(R.id.option1);
@@ -79,23 +78,9 @@ public class quiz extends AppCompatActivity {
         bOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 final String providedAnswer = (String) bOption1.getText();
                 recordAnswer(question, providedAnswer);
-
                 checkAnswer(providedAnswer);
-                if (times < 4) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            displayQuestion();
-                        }
-                    }, 1000);
-                } else {
-                    Intent intent = new Intent(quiz.this, endPage.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
-                }
             }
         });
 
@@ -105,18 +90,6 @@ public class quiz extends AppCompatActivity {
                 final String providedAnswer = (String) bOption2.getText();
                 recordAnswer(question, providedAnswer);
                 checkAnswer(providedAnswer);
-                if (times < 4) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            displayQuestion();
-                        }
-                    }, 1000);
-                } else {
-                    Intent intent = new Intent(quiz.this, endPage.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
-                }
             }
         });
 
@@ -126,18 +99,6 @@ public class quiz extends AppCompatActivity {
                 final String providedAnswer = (String) bOption3.getText();
                 recordAnswer(question, providedAnswer);
                 checkAnswer(providedAnswer);
-                if (times < 4) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            displayQuestion();
-                        }
-                    }, 1000);
-                } else {
-                    Intent intent = new Intent(quiz.this, endPage.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
-                }
             }
         });
 
@@ -147,19 +108,6 @@ public class quiz extends AppCompatActivity {
                 final String providedAnswer = (String) bOption4.getText();
                 recordAnswer(question, providedAnswer);
                 checkAnswer(providedAnswer);
-                getSavedAnswers();
-                if (times < 4) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            displayQuestion();
-                        }
-                    }, 1000);
-                } else {
-                    Intent intent = new Intent(quiz.this, endPage.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
-                }
             }
         });
 
@@ -168,25 +116,19 @@ public class quiz extends AppCompatActivity {
             public void onClick(View view) {
                 recordAnswer(question, "user did not answer");
                 final AlertDialog.Builder builder = new AlertDialog.Builder(quiz.this);
-                builder.setMessage("The right answer is: "+ answer).setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                builder.setMessage("The right answer is: " + answer).setPositiveButton("Close", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+                        if (times < 4) {
+                            displayQuestion();
+                        } else {
+                            Intent intent = new Intent(quiz.this, endPage.class);
+                            intent.putExtra("score", score);
+                            startActivity(intent);
+                        }
                     }
                 }).create().show();
-
-                if (times < 4) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            displayQuestion();
-                        }
-                    }, 1000);
-                } else {
-                    Intent intent = new Intent(quiz.this, endPage.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
-                }
             }
         });
 
@@ -198,26 +140,40 @@ public class quiz extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(quiz.this);
         if (selectedAnswer == answer) {
             score++;
-            Score.setText("SCORE : "+score);
+            Score.setText("SCORE : " + score);
 
             builder.setMessage("Right Answer").setPositiveButton("Close", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
+                    if (times < 4) {
+                        displayQuestion();
+                    } else {
+                        Intent intent = new Intent(quiz.this, endPage.class);
+                        intent.putExtra("score", score);
+                        startActivity(intent);
+                    }
                 }
             }).create().show();
 
         } else {
-            builder.setMessage("Wrong Answer, the right answer is: "+ answer).setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            builder.setMessage("Wrong Answer, the right answer is: " + answer).setPositiveButton("Close", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
+                    if (times < 4) {
+                        displayQuestion();
+                    } else {
+                        Intent intent = new Intent(quiz.this, endPage.class);
+                        intent.putExtra("score", score);
+                        startActivity(intent);
+                    }
                 }
             }).create().show();
         }
     }
 
-    public ArrayList<selectedAnswer> getSavedAnswers(){
+    public ArrayList<selectedAnswer> getSavedAnswers() {
         Log.d("saved answers", savedAnswers.toString());
         return this.savedAnswers;
     }

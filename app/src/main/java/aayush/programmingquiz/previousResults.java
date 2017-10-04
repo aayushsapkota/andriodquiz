@@ -36,14 +36,14 @@ public class previousResults extends AppCompatActivity {
                 e.printStackTrace();
             }
             answer = answers.get(i).getAnswer();
-            result +=  question + "\n"+ answer+ "\n";
+            result +=  (i+1)+": " +question + "\n => "+ answer+ "\n\n";
            // Log.d("result",result);
         }
 
         if(result == null){
-            view.setText("No Data present");
+            view.setText("Previous Results \n\n No Data present");
         }else{
-        view.setText(result);
+        view.setText("Previous Results \n\n"+result);
         }
 
         playGame.setOnClickListener(new View.OnClickListener() {
